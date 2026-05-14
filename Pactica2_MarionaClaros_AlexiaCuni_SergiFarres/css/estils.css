@@ -1,55 +1,99 @@
-* { padding: 0; margin: 0; }
+* {
+	padding: 0;
+	margin: 0;
+}
 
 body {
-    text-align: center;
-    background: #333 url(../images/20151006051016_votacion-estrellas-css.jpg);
-    color: #eee;
+	text-align: center;
+	background: #333 url(../images/20151006051016_votacion-estrellas-css.jpg);
+	color: #eee;
 	background-size: cover;
 }
 
-#principal{
+#principal {
 	width: 960px;
 	margin: 20px auto;
-  	padding: 20px;
+	padding: 20px;
 }
 
-#joc{
-	position:relative;
+#joc {
+	position: relative;
 	margin-top: 40px;
-	width:740px;
-	height:400px;
+	width: 740px;
+	height: 400px;
 	background: rgba(232, 232, 232, 0.5);
-	display: block; 
+	display: block;
 	margin: 0 auto;
 }
-#inici, #fi{
-	position:absolute;
-	left: 275px; top: 50px;
-	width: 400px; height: 300px;
+
+#inici,
+#fi {
+	position: absolute;
+	left: 275px;
+	top: 50px;
+	width: 400px;
+	height: 300px;
 	margin: 200px auto;
 	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 1.3em;
-	text-align:center;
-	border:thick #990 solid;
+	text-align: center;
+	border: thick #990 solid;
 	border-radius: 25px;
-	background-color: #CFC;  
+	background-color: #CFC;
 	opacity: 0.9;
 }
-.dreta{
-	text-align:right;
+
+.dreta {
+	text-align: right;
 }
+
 #game {
-	background-color: #eee;  /* color gris clar  */
+	background-color: #eee;
+	/* color gris clar  */
 	border: #666 50px solid;
 	border-bottom-width: 0;
 	display: block;
 	margin: 0 auto;
 }
 
-#capçalera{
+#capçalera {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 1.2em;
-	background-color:#A3A352;  /* rgb(163,163,82) */
+	background-color: #A3A352;
+	/* rgb(163,163,82) */
 	height: 200px;
-	border-radius:25px;
+	border-radius: 25px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 250px;
+}
+
+#btnNivell1{
+	background-color: rgb(18, 255, 18);
+}
+
+#btnNivell2{
+	background-color: orange;
+}
+
+#btnNivell3{
+	background-color: red;
 }

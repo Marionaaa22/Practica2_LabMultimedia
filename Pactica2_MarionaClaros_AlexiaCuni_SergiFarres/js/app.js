@@ -10,6 +10,8 @@ $(document).ready(function() {
     joc = new Joc(myCanvas,ctx);
     joc.inicialitza();
     animacio();
+    $("#myModal").css("display", "flex");
+
 
 });
 
