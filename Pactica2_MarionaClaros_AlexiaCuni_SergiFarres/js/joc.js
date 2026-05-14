@@ -39,11 +39,22 @@ class Joc{
         this.pala.draw(this.ctx);
         this.bola.draw(this.ctx);
         this.totxo.draw(this.ctx);
+        
         $(document).on("keydown",{joc:this}, function(e){
            //Moviment de la pala
-        });
-        $(document).on("keyup", {joc:this}, function(e){
-            //Moviment de la pala
+           switch (e.keyCode) {
+            case 37:    //left arrow key
+                if(e.data.joc.pala.posicio.x > 0){
+                    e.data.joc.pala.mou(-1, 0);
+                }
+                break;
+            case 39:    //right arrow key
+                if(e.data.joc.pala.posicio.x < e.data.joc.canvas.width - e.data.joc.pala.amplada){
+                    e.data.joc.pala.mou(1, 0);
+                }
+                break;
+        }
+            
         });
 
         
