@@ -29,6 +29,7 @@ class Bola {
         let xoc = false;
         let ampleCanvas = 300;
         let alturaCanvas = 150;
+        let pala = joc.pala;
 
         // Xoc amb els laterals del canvas
 
@@ -88,6 +89,22 @@ class Bola {
         }
 
         //Xoc amb la pala
+
+        if (
+            this.posicio.y + this.radi >= pala.posicio.y &&
+            this.posicio.x >= pala.posicio.x &&
+            this.posicio.x <= pala.posicio.x + pala.amplada
+        ) {
+            let centroPala = pala.posicio.x + pala.amplada / 2;
+            let distancia = this.posicio.x - centroPala;
+            let normalizado = distancia / (pala.amplada / 2);
+
+            this.vx = normalizado * 2;
+            this.vy = -Math.abs(this.vy);
+
+            this.posicio.y = pala.posicio.y - this.radi;
+        }
+        
 
         //Xoc amb els totxos del mur
         //Utilitzem el mètode INTERSECCIOSEGMENTRECTANGLE
