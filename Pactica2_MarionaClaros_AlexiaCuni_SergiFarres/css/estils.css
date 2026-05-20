@@ -2,7 +2,7 @@
 
 body {
     text-align: center;
-    background: #333 url(../images/20151006051016_votacion-estrellas-css.jpg);
+    background: #333 url(../images/fondo.gif);
     color: #eee;
 	background-size: cover;
 }
@@ -52,4 +52,17 @@ body {
 	background-color:#A3A352;  /* rgb(163,163,82) */
 	height: 200px;
 	border-radius:25px;
+}
+
+#layoutInfo{
+	display: flex;
+	width:740px;
+	
+	margin: 0 auto;
+}
+
+#layoutInfo p{
+	
+	
+	margin: 0 auto;
 }
