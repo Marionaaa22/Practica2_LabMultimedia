@@ -108,24 +108,57 @@ class Bola {
 
         //Xoc amb els totxos del mur
         //Utilitzem el mètode INTERSECCIOSEGMENTRECTANGLE
-        if (!xoc && joc && joc.totxo && joc.totxo.totxos) {
-        let llistaTotxos = joc.totxo.totxos;
+     if (!xoc && joc && joc.totxo && joc.totxo.totxos) {
+    let llistaTotxos = joc.totxo.totxos;
 
-        for (let i = 0; i < llistaTotxos.length; i++) {
-            let t = llistaTotxos[i];
+    for (let i = 0; i < llistaTotxos.length; i++) {
+        let t = llistaTotxos[i];
 
-            
-            if (t.tocat) continue;
+        if (t.tocat) continue;
 
-            
-            if (t.puntInteriorRectangle(puntSeguent)) {
-                t.tocat = true; 
+        if (t.puntInteriorRectangle(puntSeguent)) {
+            t.tocat = true; // Rompemos el bloque
+            xoc = true;
+
+            // 1. Determinar el centro del bloque
+            let centroTotxoX = t.posicio.x + t.amplada / 2;
+            let centroTotxoY = t.posicio.y + t.alcada / 2;
+
+            // 2. Calcular la distancia desde el centro a la posición de la bola
+            let distanciaX = this.posicio.x - centroTotxoX;
+            let distanciaY = this.posicio.y - centroTotxoY;
+
+            // 3. Normalizar la distancia dividiendo por la mitad del tamaño 
+            // (Esto equilibra bloques que sean muy anchos pero muy bajitos)
+            let overlapX = Math.abs(distanciaX) / (t.amplada / 2);
+            let overlapY = Math.abs(distanciaY) / (t.alcada / 2);
+
+            if (overlapX > overlapY) {
+                // --- REBOTE HORIZONTAL (Pega en los laterales izquierdo/derecho) ---
+                this.vx = -this.vx;
+                
+                // Recolocamos la bola fuera del bloque para evitar que se quede atrapada
+                if (distanciaX > 0) {
+                    this.posicio.x = t.posicio.x + t.amplada + this.radi; // Lado derecho
+                } else {
+                    this.posicio.x = t.posicio.x - this.radi; // Lado izquierdo
+                }
+            } else {
+               
                 this.vy = -this.vy;
-                xoc = true;
-                break;
-            }
+                
+              
+                if (distanciaY > 0) {
+                    this.posicio.y = t.posicio.y + t.alcada + this.radi; // Lado inferior
+                } else {
+                    this.posicio.y = t.posicio.y - this.radi; // Lado superior
+                }
+            }   
+            
+            break; // Salimos del bucle al chocar con un bloque
         }
     }
+}
 
 
         if (!xoc) {
