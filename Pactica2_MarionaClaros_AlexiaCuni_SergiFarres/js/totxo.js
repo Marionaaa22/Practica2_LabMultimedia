@@ -9,7 +9,7 @@ class Totxo{
     this.alcada=alcada;         // mides
     this.tocat=false;       // marquem els totxos tocats per la bola => no es pintaran
     this.posicio = puntPosicio;         // posició, en píxels respecte el canvas
-    this.color;
+    this.color ;
     this.punts;
 
 
@@ -17,17 +17,18 @@ class Totxo{
     get area() {
         return this.amplada * this.alcada;
     }
-    
-    draw(ctx) {
+ draw(ctx) {
         if (!this.tocat){
             ctx.save();
             ctx.fillStyle = this.color;
             ctx.fillRect(this.posicio.x, this.posicio.y, this.amplada, this.alcada);
+            // Opcional: Un pequeño borde para distinguir los ladrillos entre sí
+            ctx.strokeStyle = "#f5eeeebf";
+            ctx.strokeRect(this.posicio.x, this.posicio.y, this.amplada, this.alcada);
             ctx.restore();
-
         }
-        
-    }
+    }  
+    
     puntInteriorRectangle(punt){
         return (punt.x >= this.posicio.x &&
             punt.x <= this.posicio.x + this.amplada) &&
