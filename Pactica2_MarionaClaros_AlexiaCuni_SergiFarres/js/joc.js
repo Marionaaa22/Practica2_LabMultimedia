@@ -39,17 +39,46 @@ class Joc{
         this.pala.draw(this.ctx);
         this.bola.draw(this.ctx);
         this.totxo.draw(this.ctx);
-        $(document).on("keydown",{joc:this}, function(e){
-           //Moviment de la pala
+        
+        $(document).on("keydown", {joc:this}, function(e){
+
+            if(e.keyCode === 37){
+                e.data.joc.key.LEFT.pressed = true 
+            }
+
+            if(e.keyCode === 39){
+                e.data.joc.key.RIGHT.pressed = true;
+            }
+
         });
+        
         $(document).on("keyup", {joc:this}, function(e){
-            //Moviment de la pala
+
+            if(e.keyCode === 37){
+                e.data.joc.key.LEFT.pressed = false;
+            }
+
+            if(e.keyCode === 39){
+                e.data.joc.key.RIGHT.pressed = false;
+            }
+
         });
 
         
     }
 
     update(){
+
+        if (this.pala.posicio.x > 0){
+            if(this.key.LEFT.pressed){
+            this.pala.mou(-1, 0);
+            }
+        }
+        if (this.pala.posicio.x < this.canvas.width - this.pala.amplada){
+            if(this.key.RIGHT.pressed){
+                this.pala.mou(1, 0);
+            }
+        }
         this.bola.update();
         this.pala.update();
         this.draw();       
