@@ -11,22 +11,62 @@
 <html>
 
 <body>
-    <div id="principal">
+    <div id="principal" class="frame neon">
+
+        <div id="layoutInfo">
+            <p>❤️ Vidas: <span>3</span></p>
+            <p>⭐ Puntos: <span>1200</span></p>
+            <p>⏱ Tiempo: <span>45</span></p>
+            <p>🎮 Nivel: <span id="nivellActual">0</span></p>
+        </div>
 
         <canvas id="joc"></canvas>
 
+    </div class="frame neon">
+    <h2>Nom: <span id="nomJugador"></span></h2>
+    <div>
 
-        <div class="modal" id="myModal">
-            <div class="modal-content">
-                <h1>PING BALL</h1>
-                <h3>Introdueix el teu nom</h3>
-                <input type="text" name="nom" id="inputNom" placeholder="Nom del jugador">
-                <h3>Selecciona el nivell</h3>
-                <button type="button" id="btnNivell1">NIVELL 1</button>
-                <button type="button" id="btnNivell2">NIVELL 2</button>
-                <button type="button" id="btnNivell3">NIVELL 3</button>
-            </div>
+    </div>
+    <div class="ranking">
+
+        <h2>Top 3</h2>
+
+        <div class="fila">
+            <span>aa</span>
+            <span>80</span>
         </div>
+
+        <div class="fila">
+            <span>Jordi</span>
+            <span>30</span>
+        </div>
+
+        <div class="fila">
+            <span>null</span>
+            <span>0</span>
+        </div>
+
+    </div>
+
+    <div class="modal" id="modalNom">
+        <div class="modal-content">
+            <h1>PING BALL</h1>
+
+            <h3>Introdueix el teu nom</h3>
+            <input type="text" id="inputNom" placeholder="Nom del jugador">
+
+            <button type="button" id="btnContinuar">Continuar</button>
+        </div>
+    </div>
+    <div class="modal" id="modalNivell">
+        <div class="modal-content">
+            <h1>Selecciona nivell</h1>
+
+            <button type="button" id="btnNivell1">NIVELL 1</button>
+            <button type="button" id="btnNivell2">NIVELL 2</button>
+            <button type="button" id="btnNivell3">NIVELL 3</button>
+        </div>
+    </div>
     </div>
 
 

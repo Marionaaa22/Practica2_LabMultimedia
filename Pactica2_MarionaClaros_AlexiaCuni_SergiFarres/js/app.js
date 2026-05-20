@@ -2,39 +2,63 @@
 * APLICACIÓ
 */
 
-$(document).ready(function() {
+let joc;
+
+$(document).ready(function () {
 
     let myCanvas = document.getElementById("joc");
     let ctx = myCanvas.getContext("2d");
 
-    joc = new Joc(myCanvas,ctx);
+    joc = new Joc(myCanvas, ctx);
     joc.inicialitza();
-    configuracioJoc();
-    animacio();
-    $("#myModal").css("display", "flex");
 
+    let nomJugador = "";
+    
+    $("#modalNom").css("display", "flex");
+
+    $("#btnContinuar").on("click", function () {
+
+        let nom = $("#inputNom").val().trim();
+
+        if (nom === "") {
+            alert("Introdueix un nom!");
+            return;
+        }
+
+        nomJugador = nom;
+        $("#nomJugador").text(nomJugador);
+
+        $("#modalNom").hide();
+        $("#modalNivell").css("display", "flex");
+    });
+
+    function iniciarJuego(nivell) {
+
+        joc.configuraNivell(nivell);
+
+        $("#modalNivell").hide();
+
+        animacio();
+    }
+
+    $("#btnNivell1").click(function () {
+        iniciarJuego(0);
+        $("#nivellActual").text("1");
+    });
+
+    $("#btnNivell2").click(function () {
+        iniciarJuego(1);
+        $("#nivellActual").text("2");
+    });
+
+    $("#btnNivell3").click(function () {
+        iniciarJuego(2);
+        $("#nivellActual").text("3");
+    });
 
 });
 
 function animacio() {
     joc.update();
-    requestAnimationFrame(animacio);    
-}
-
-function configuracioJoc() {
-    $("#myModal").css("display", "flex");
-
-    $("#btnNivell1").on("click", function () {
-        console.log("nivell 1");
-        $("#myModal").css("display", "none");
-    });
-    $("#btnNivell2").on("click", function () {
-        console.log("nivell 2");
-        $("#myModal").css("display", "none");
-    });
-    $("#btnNivell3").on("click", function () {
-        console.log("nivell 3");
-        $("#myModal").css("display", "none");
-    });
-
+    requestAnimationFrame(animacio);
 }
