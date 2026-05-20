@@ -108,6 +108,24 @@ class Bola {
 
         //Xoc amb els totxos del mur
         //Utilitzem el mètode INTERSECCIOSEGMENTRECTANGLE
+        if (!xoc && joc && joc.totxo && joc.totxo.totxos) {
+        let llistaTotxos = joc.totxo.totxos;
+
+        for (let i = 0; i < llistaTotxos.length; i++) {
+            let t = llistaTotxos[i];
+
+            
+            if (t.tocat) continue;
+
+            
+            if (t.puntInteriorRectangle(puntSeguent)) {
+                t.tocat = true; 
+                this.vy = -this.vy;
+                xoc = true;
+                break;
+            }
+        }
+    }
 
 
         if (!xoc) {
