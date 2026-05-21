@@ -3,6 +3,8 @@
 */
 
 let joc;
+let intervalTemps;
+let segons = 0;
 
 $(document).ready(function () {
 
@@ -39,6 +41,7 @@ $(document).ready(function () {
         $("#modalNivell").hide();
 
         animacio();
+        iniciarTemps();
     }
 
     $("#btnNivell1").click(function () {
@@ -57,6 +60,21 @@ $(document).ready(function () {
     });
 
 });
+
+function iniciarTemps() {
+
+    segons = 0;
+    $("#temps").text(segons + "s");
+
+    clearInterval(intervalTemps);
+
+    intervalTemps = setInterval(function () {
+
+        segons++;
+        $("#temps").text(segons + "s");
+
+    }, 1000);
+}
 
 function animacio() {
     joc.update();

@@ -104,29 +104,44 @@ class Bola {
 
             this.posicio.y = pala.posicio.y - this.radi;
         }
-        
+
 
         //Xoc amb els totxos del mur
         //Utilitzem el mètode INTERSECCIOSEGMENTRECTANGLE
+        let puntsJoc = 0;
         if (!xoc && joc && joc.totxo && joc.totxo.totxos) {
-        let llistaTotxos = joc.totxo.totxos;
+            let llistaTotxos = joc.totxo.totxos;
 
-        for (let i = 0; i < llistaTotxos.length; i++) {
-            let t = llistaTotxos[i];
+            for (let i = 0; i < llistaTotxos.length; i++) {
+                let t = llistaTotxos[i];
 
-            
-            if (t.tocat) continue;
 
-            
-            if (t.puntInteriorRectangle(puntSeguent)) {
-                t.tocat = true; 
-                this.vy = -this.vy;
-                xoc = true;
-                break;
+                if (t.tocat) continue;
+
+                if (t.puntInteriorRectangle(puntSeguent)) {
+
+                    t.tocat = true;
+
+                    puntsJoc++;
+
+                    $("#punts").text(puntsJoc);
+
+                    // Rebote
+                    this.vy = -this.vy;
+
+                    xoc = true;
+
+                    break;
+                }
+
+                if (t.puntInteriorRectangle(puntSeguent)) {
+                    t.tocat = true;
+                    this.vy = -this.vy;
+                    xoc = true;
+                    break;
+                }
             }
         }
-    }
-
 
         if (!xoc) {
             this.posicio.x = trajectoria.puntB.x;
