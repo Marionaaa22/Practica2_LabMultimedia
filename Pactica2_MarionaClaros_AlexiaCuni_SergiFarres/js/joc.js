@@ -11,7 +11,9 @@ class Joc {
         this.totxoamplada = 22;
         this.totxoalcada = 10; // MIDES DEL TOTXO EN PÍXELS
         this.totxocolor = 20;
-
+        this.vides = 3;
+        this.punts = 0;
+        this.jocActiu = true;
 
         this.bola = new Bola(new Punt(this.canvas.width / 2, this.canvas.height / 2), 3);
         this.pala = new Pala(new Punt((this.canvas.width - 60) / 2, this.canvas.height - 15), 60, 4);
@@ -90,9 +92,9 @@ class Joc {
 
     configuraNivell(nivell) {
         this.totxo.generaMur(
-        this.totxoamplada,
-        this.totxoalcada,
-        nivell
-    );
+            this.totxoamplada,
+            this.totxoalcada,
+            nivell
+        );
     }
 }

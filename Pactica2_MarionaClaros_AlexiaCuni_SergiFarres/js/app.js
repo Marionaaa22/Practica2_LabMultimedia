@@ -15,7 +15,7 @@ $(document).ready(function () {
     joc.inicialitza();
 
     let nomJugador = "";
-    
+
     $("#modalNom").css("display", "flex");
 
     $("#btnContinuar").on("click", function () {
@@ -39,6 +39,14 @@ $(document).ready(function () {
         joc.configuraNivell(nivell);
 
         $("#modalNivell").hide();
+
+        setTimeout(() => {
+
+            joc.bola.vx = 1;
+            joc.bola.vy = 1;
+
+        }, 1000);
+
 
         animacio();
         iniciarTemps();
@@ -76,7 +84,39 @@ function iniciarTemps() {
     }, 1000);
 }
 
+
+function tornaJugar() {
+    $("#modalGameOver").hide();
+
+    joc.vides = 3;
+    joc.punts = 0;
+
+    $("#videsJugador").text(joc.vides);
+    $("#punts").text(joc.punts);
+
+    joc.bola.posicio.x = joc.canvas.width / 2;
+    joc.bola.posicio.y = joc.canvas.height / 2;
+    joc.bola.enMoviment = true;
+    joc.jocActiu = true;
+    
+    for (let t of joc.totxo.totxos) {
+        t.tocat = false;
+    }
+
+    iniciarTemps();
+     $("#modalNivell").css("display", "flex");
+
+}
+
+function mostrarAjustes() {
+    $("#modalAjustes").css("display", "flex");
+}
+
 function animacio() {
+    if (!joc.jocActiu){
+        return;
+    }
+
     joc.update();
     requestAnimationFrame(animacio);
 }
