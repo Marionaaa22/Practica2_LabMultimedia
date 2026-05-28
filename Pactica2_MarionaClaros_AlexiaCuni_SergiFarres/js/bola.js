@@ -111,7 +111,7 @@ class Bola {
         let puntsJoc = 0;
         if (!xoc && joc && joc.totxo && joc.totxo.totxos) {
             let llistaTotxos = joc.totxo.totxos;
-
+            const audioMur = new Audio('./so/romMur.mp3');
             for (let i = 0; i < llistaTotxos.length; i++) {
                 let t = llistaTotxos[i];
 
@@ -126,7 +126,6 @@ class Bola {
 
                     $("#punts").text(puntsJoc);
 
-                    // Rebote
                     this.vy = -this.vy;
 
                     xoc = true;
