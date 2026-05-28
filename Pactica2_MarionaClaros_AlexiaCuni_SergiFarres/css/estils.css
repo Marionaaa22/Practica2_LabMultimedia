@@ -209,6 +209,12 @@ body {
         0 0 20px #00f5ff;
 }
 
+#btnTornarJugar {
+
+    background:
+        linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
 #btnContinuar {
 
     background:
@@ -271,8 +277,18 @@ body {
         0 0 20px #00f5ff;
 }
 
+#btnAjustes {
+    margin-left: auto;  
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
 #jugadorInfo span {
 
+    
     margin-left: 10px;
 
     color: #ffe600;

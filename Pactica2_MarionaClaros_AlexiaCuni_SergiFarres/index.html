@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>BreackOut 23-24
-    </title>
+    <title>PING BALL</title>
     <link rel="stylesheet" href="css\estils.css">
 
 </head>
@@ -15,11 +14,12 @@
 
         <div id="jugadorInfo">
             👤 <span id="nomJugador"></span>
+            <button id="btnAjustes" onclick="mostrarAjustes()">⚙️</button>
         </div>
 
         <div id="layoutInfo">
-            <p>❤️ Vidas: <span>3</span></p>
-            <p>⭐ Puntos: <span id = "punts">0</span></p>
+            <p>❤️ Vidas: <span id="videsJugador">3</span></p>
+            <p>⭐ Puntos: <span id="punts">0</span></p>
             <p>⏱ Tiempo: <span id="temps">0</span></p>
             <p>🎮 Nivel: <span id="nivellActual">0</span></p>
         </div>
@@ -58,6 +58,13 @@
             <button type="button" id="btnContinuar">Continuar</button>
         </div>
     </div>
+
+    <div class="modal" id="modalAjustes">
+        <div class="modal-content">
+            <h1>Ajustes</h1>
+        </div>
+    </div>
+
     <div class="modal" id="modalNivell">
         <div class="modal-content">
             <h1>Selecciona nivell</h1>
@@ -70,6 +77,17 @@
     </div>
 
 
+    <div class="modal" id="modalGameOver">
+        <div class="modal-content">
+            <h1>GAME OVER</h1>
+            <h2><span id="nomJugadorFinal"></span></h2>
+            <h2>Temps: <span id="tempsFinal"></span></h2>
+            <h2>Punts: <span id="puntsFinal"></span></h2>
+
+
+            <button type="button" id="btnTornarJugar" onclick="tornaJugar()">Tornar a jugar</button>
+        </div>
+    </div>
 </body>
 
 

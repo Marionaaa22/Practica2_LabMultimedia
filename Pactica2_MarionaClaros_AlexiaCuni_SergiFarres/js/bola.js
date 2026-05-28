@@ -5,6 +5,10 @@ class Bola {
         this.vx = 1;
         this.vy = -1;
         this.color = "#fff";
+        this.audioMur = new Audio("./so/romperMuro.mp3");
+        this.soPala = new Audio("./so/soPala.mp3");
+        this.soVides = new Audio("./so/so_perdvides.mp3");
+        this.enMoviment = true;
 
     };
 
@@ -19,7 +23,10 @@ class Bola {
         this.posicio.x += x;
         this.posicio.y += y;
     }
+
     update() {
+
+        if (!this.enMoviment) return;
 
         let puntActual = this.posicio;
         let puntSeguent = new Punt(this.posicio.x + this.vx,
@@ -78,14 +85,48 @@ class Bola {
         // Xoc lateral inferior
         if (trajectoria.puntB.y + this.radi > alturaCanvas) {
 
-            exces = (trajectoria.puntB.y + this.radi - alturaCanvas) / this.vy;
+            joc.vides--;
 
-            this.posicio.x = trajectoria.puntB.x - exces * this.vx;
-            this.posicio.y = alturaCanvas - this.radi;
+            this.soVides.play();
+            $("#videsJugador").text(joc.vides);
 
-            xoc = true;
+            this.posicio.x = joc.canvas.width / 2;
+            this.posicio.y = joc.canvas.height / 2;
 
-            this.vy = -this.vy;
+            this.vx = 0;
+            this.vy = 0;
+
+            setTimeout(() => {
+
+                this.vx = 1;
+                this.vy = 1;
+
+            }, 1000);
+
+            if (joc.vides <= 0) {
+
+                joc.jocActiu = false;
+
+                $("#nomJugadorFinal").text($("#nomJugador").text());
+                $("#tempsFinal").text($("#temps").text());
+                $("#puntsFinal").text(joc.punts);
+                $("#modalGameOver").css("display", "flex");
+
+                joc.vides = 3;
+                joc.punts = 0;
+
+                $("#videsJugador").text(joc.vides);
+                $("#punts").text(joc.punts);
+                $("#modalGameOver").css("display", "flex");
+                joc.jocActiu = false;
+
+                // Reiniciar muro
+                for (let t of joc.totxo.totxos) {
+                    t.tocat = false;
+                }
+            }
+
+            return;
         }
 
         //Xoc amb la pala
@@ -103,34 +144,33 @@ class Bola {
             this.vy = -Math.abs(this.vy);
 
             this.posicio.y = pala.posicio.y - this.radi;
+
+            this.soPala.currentTime = 0;
+            this.soPala.play();
         }
 
 
         //Xoc amb els totxos del mur
         //Utilitzem el mètode INTERSECCIOSEGMENTRECTANGLE
-        let puntsJoc = 0;
         if (!xoc && joc && joc.totxo && joc.totxo.totxos) {
             let llistaTotxos = joc.totxo.totxos;
-
             for (let i = 0; i < llistaTotxos.length; i++) {
                 let t = llistaTotxos[i];
-
-
                 if (t.tocat) continue;
-
                 if (t.puntInteriorRectangle(puntSeguent)) {
 
                     t.tocat = true;
 
-                    puntsJoc++;
+                    joc.punts = joc.punts + 10;
 
-                    $("#punts").text(puntsJoc);
+                    $("#punts").text(joc.punts);
 
-                    // Rebote
                     this.vy = -this.vy;
 
                     xoc = true;
 
+                    this.audioMur.currentTime = 0;
+                    this.audioMur.play();
                     break;
                 }
 
