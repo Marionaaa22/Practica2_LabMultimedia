@@ -3,23 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>BreackOut 23-24
-    </title>
+    <title>PING BALL</title>
     <link rel="stylesheet" href="css\estils.css">
 
 </head>
 <html>
 
 <body>
-
-    
     <div id="principal" class="frame neon">
 
+        <div id="jugadorInfo">
+            👤 <span id="nomJugador"></span>
+            <button id="btnAjustes" onclick="mostrarAjustes()">⚙️</button>
+        </div>
+
         <div id="layoutInfo">
-            <p>❤️ Vidas: <span>3</span></p>
-            <p>⭐ Puntos: <span>1200</span></p>
-            <p>⏱ Tiempo: <span>45</span></p>
-            <p>🎮 Nivel: <span>2</span></p>
+            <p>❤️ Vidas: <span id="videsJugador">3</span></p>
+            <p>⭐ Puntos: <span id="punts">0</span></p>
+            <p>⏱ Tiempo: <span id="temps">0</span></p>
+            <p>🎮 Nivel: <span id="nivellActual">0</span></p>
         </div>
 
         <canvas id="joc"></canvas>
@@ -46,21 +48,46 @@
 
     </div>
 
+    <div class="modal" id="modalNom">
+        <div class="modal-content">
+            <h1>PING BALL</h1>
 
-        <div class="modal" id="myModal">
-            <div class="modal-content">
-                <h1>PING BALL</h1>
-                <h3>Introdueix el teu nom</h3>
-                <input type="text" name="nom" id="inputNom" placeholder="Nom del jugador">
-                <h3>Selecciona el nivell</h3>
-                <button type="button" id="btnNivell1">NIVELL 1</button>
-                <button type="button" id="btnNivell2">NIVELL 2</button>
-                <button type="button" id="btnNivell3">NIVELL 3</button>
-            </div>
+            <h3>Introdueix el teu nom</h3>
+            <input type="text" id="inputNom" placeholder="Nom del jugador">
+
+            <button type="button" id="btnContinuar">Continuar</button>
         </div>
     </div>
 
+    <div class="modal" id="modalAjustes">
+        <div class="modal-content">
+            <h1>Ajustes</h1>
+        </div>
+    </div>
 
+    <div class="modal" id="modalNivell">
+        <div class="modal-content">
+            <h1>Selecciona nivell</h1>
+
+            <button type="button" id="btnNivell1">NIVELL 1</button>
+            <button type="button" id="btnNivell2">NIVELL 2</button>
+            <button type="button" id="btnNivell3">NIVELL 3</button>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="modal" id="modalGameOver">
+        <div class="modal-content">
+            <h1>GAME OVER</h1>
+            <h2><span id="nomJugadorFinal"></span></h2>
+            <h2>Temps: <span id="tempsFinal"></span></h2>
+            <h2>Punts: <span id="puntsFinal"></span></h2>
+
+
+            <button type="button" id="btnTornarJugar" onclick="tornaJugar()">Tornar a jugar</button>
+        </div>
+    </div>
 </body>
 
 
