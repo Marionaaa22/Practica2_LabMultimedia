@@ -5,8 +5,12 @@
 let joc;
 let intervalTemps;
 let segons = 0;
+let nomJugador = "";
 
 $(document).ready(function () {
+
+
+    
 
     let myCanvas = document.getElementById("joc");
     let ctx = myCanvas.getContext("2d");
@@ -14,7 +18,6 @@ $(document).ready(function () {
     joc = new Joc(myCanvas, ctx);
     joc.inicialitza();
 
-    let nomJugador = "";
 
     $("#modalNom").css("display", "flex");
 
@@ -35,6 +38,7 @@ $(document).ready(function () {
     });
 
     function iniciarJuego(nivell) {
+        registrarRecords();
 
         joc.configuraNivell(nivell);
 
@@ -86,6 +90,9 @@ function iniciarTemps() {
 
 
 function tornaJugar() {
+
+    registrarRecords();
+
     $("#modalGameOver").hide();
 
     joc.vides = 3;
@@ -119,4 +126,56 @@ function animacio() {
 
     joc.update();
     requestAnimationFrame(animacio);
+}
+
+function registrarRecords(){
+    // 0. IMPORTANTE: Asegúrate de leer la tabla de LocalStorage al inicio de la función 
+    // para que "tablaLideres" no esté vacía al reiniciar el juego.
+    let tablaLideres = localStorage.getItem('top3_jugadores');
+    tablaLideres = tablaLideres ? JSON.parse(tablaLideres) : [];
+
+    // Convertimos los puntos de HTML (texto) a número entero obligatoriamente
+    let puntosActuales = parseInt($("#puntsFinal").text()) || 0; 
+
+    // 1. BUSCAR: Comprobamos si el jugador ya existe en la tabla de registros
+    let jugadorExistente = tablaLideres.find(j => j.nombre.toLowerCase().trim() === nomJugador.toLowerCase().trim());
+
+    if (jugadorExistente) {
+        // Si existe, SOLO actualizamos los puntos SI la puntuación nueva es mejor
+        if (puntosActuales > jugadorExistente.puntos) {
+            jugadorExistente.puntos = puntosActuales;
+        }
+    } else {
+        // Si NO existe, lo añadimos como un jugador nuevo a la lista
+        tablaLideres.push({
+            nombre: nomJugador, 
+            puntos: puntosActuales
+        });
+    }
+
+    // 2. ORDENAR: De mayor a menor puntuación (ahora que son números funciona al 100%)
+    tablaLideres.sort((a, b) => b.puntos - a.puntos);
+
+    // 3. RECORTAR: Quedarse estrictamente con los 3 mejores
+    let top3 = tablaLideres.slice(0, 3);
+
+    // 4. GUARDAR: Actualizar el LocalStorage con el nuevo Top 3
+    localStorage.setItem('top3_jugadores', JSON.stringify(top3));
+
+    // 5. RENDERIZAR EN HTML: Seleccionamos el contenedor principal de tu ranking
+    let $ranking = $('.ranking');
+
+    // Borramos las filas existentes (.fila)
+    $ranking.find('.fila').remove();
+
+    // Recorremos tu array 'top3' pintando la estructura
+    top3.forEach((jugadorActual) => {
+        let filaHtml = `
+            <div class="fila">
+                <span>${jugadorActual.nombre}</span>
+                <span>${jugadorActual.puntos}</span>
+            </div>
+        `;
+        $ranking.append(filaHtml);
+    });
 }
