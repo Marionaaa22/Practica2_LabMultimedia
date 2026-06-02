@@ -108,6 +108,11 @@ function tornaJugar() {
 
 }
 
+function sortirJoc() {
+   
+
+}
+
 function mostrarAjustes() {
     $("#modalAjustes").css("display", "flex");
 }
