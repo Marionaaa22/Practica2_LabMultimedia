@@ -29,22 +29,7 @@
     </div>
     <div class="ranking">
 
-        <h2>Top 3</h2>
-
-        <div class="fila">
-            <span>aa</span>
-            <span>80</span>
-        </div>
-
-        <div class="fila">
-            <span>Jordi</span>
-            <span>30</span>
-        </div>
-
-        <div class="fila">
-            <span>null</span>
-            <span>0</span>
-        </div>
+        <h2>Ranking</h2>
 
     </div>
 
@@ -62,6 +47,28 @@
     <div class="modal" id="modalAjustes">
         <div class="modal-content">
             <h1>Ajustes</h1>
+            <h2>Selecciona el color de la bola</h2>
+            <select id="colorBola">
+                <option value="red">Vermell</option>
+                <option value="blue">Blau</option>
+                <option value="green">Verd</option>
+                <option value="yellow">Groc</option>
+                <option value="purple">Lila</option>
+                <option value="orange">Taronja</option>
+                <option value="white" selected>Blanc</option>
+            </select>
+            <h2>Selecciona el color de la pala</h2>
+            <select id="colorPala">
+                <option value="red">Vermell</option>
+                <option value="blue">Blau</option>
+                <option value="green">Verd</option>
+                <option value="yellow">Groc</option>
+                <option value="purple">Lila</option>
+                <option value="orange">Taronja</option>
+                <option value="white" selected>Blanc</option>
+            </select>
+            <button type="button" id="btnCamabiarNivell" onclick="cambiaNivell()">Cambiar nivell</button>
+            <button type="button" id="btnGuardar" onclick="guardarAjustes()">Guardar</button>
         </div>
     </div>
 
@@ -86,6 +93,7 @@
 
 
             <button type="button" id="btnTornarJugar" onclick="tornaJugar()">Tornar a jugar</button>
+            <button type="button" id="btnSortir" onclick="sortirJoc()">Sortir</button>
         </div>
     </div>
 </body>

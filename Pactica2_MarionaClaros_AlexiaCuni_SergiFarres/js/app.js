@@ -5,6 +5,7 @@
 let joc;
 let intervalTemps;
 let segons = 0;
+let nomJugador = "";
 
 $(document).ready(function () {
 
@@ -13,8 +14,6 @@ $(document).ready(function () {
 
     joc = new Joc(myCanvas, ctx);
     joc.inicialitza();
-
-    let nomJugador = "";
 
     $("#modalNom").css("display", "flex");
 
@@ -40,13 +39,19 @@ $(document).ready(function () {
 
         $("#modalNivell").hide();
 
+        // Colores por defecto
+        joc.bola.color = "white";
+        joc.pala.color = "white";
+
+        $("#colorBola").val("white");
+        $("#colorPala").val("white");
+
         setTimeout(() => {
 
             joc.bola.vx = 1;
             joc.bola.vy = 1;
 
         }, 1000);
-
 
         animacio();
         iniciarTemps();
@@ -86,6 +91,10 @@ function iniciarTemps() {
 
 
 function tornaJugar() {
+    joc.jocActiu = false;
+
+    registrarRecords();
+
     $("#modalGameOver").hide();
 
     joc.vides = 3;
@@ -98,22 +107,137 @@ function tornaJugar() {
     joc.bola.posicio.y = joc.canvas.height / 2;
     joc.bola.enMoviment = true;
     joc.jocActiu = true;
-    
+
     for (let t of joc.totxo.totxos) {
         t.tocat = false;
     }
 
     iniciarTemps();
-     $("#modalNivell").css("display", "flex");
+    $("#modalNivell").css("display", "flex");
+
+}
+
+function sortirJoc() {
+    joc.jocActiu = false;
+
+    joc.vides = 3;
+    joc.punts = 0;
+
+    $("#videsJugador").text(joc.vides);
+    $("#punts").text(joc.punts);
+
+    $("#inputNom").val("");
+    $("#nomJugador").text("");
+
+    $("#modalGameOver").hide();
+    $("#modalNivell").hide();
+    $("#modalAjustes").hide();
+
+    joc.bola.posicio.x = joc.canvas.width / 2;
+    joc.bola.posicio.y = joc.canvas.height / 2;
+    joc.bola.enMoviment = true;
+    joc.jocActiu = true;
+
+    for (let t of joc.totxo.totxos) {
+        t.tocat = false;
+    }
+
+    $("#modalNom").css("display", "flex");
 
 }
 
 function mostrarAjustes() {
+    joc.jocActiu = false;
     $("#modalAjustes").css("display", "flex");
+
 }
 
+function guardarAjustes() {
+    let colorBola = document.getElementById("colorBola").value;
+    let colorPala = document.getElementById("colorPala").value;
+
+
+    joc.bola.color = colorBola;
+    joc.pala.color = colorPala;
+
+    joc.bola.color = colorBola;
+    joc.pala.color = colorPala;
+
+    $("#modalAjustes").hide();
+
+    joc.jocActiu = true;
+    requestAnimationFrame(animacio);
+
+}
+
+function cambiaNivell() {
+
+    $("#modalAjustes").hide();
+    joc.jocActiu = false
+
+    joc.jocActiu = false;
+
+    joc.vides = 3;
+    joc.punts = 0;
+
+    $("#videsJugador").text(joc.vides);
+    $("#punts").text(joc.punts);
+
+    $("#modalNivell").css("display", "flex");
+
+    joc.bola.posicio.x = joc.canvas.width / 2;
+    joc.bola.posicio.y = joc.canvas.height / 2;
+    joc.bola.enMoviment = true;
+    joc.jocActiu = true;
+
+    for (let t of joc.totxo.totxos) {
+        t.tocat = false;
+    }
+
+}
+
+function registrarRecords(){
+
+    let tablaLideres = localStorage.getItem('top3_jugadores');
+    tablaLideres = tablaLideres ? JSON.parse(tablaLideres) : [];
+
+    let puntosActuales = parseInt($("#puntsFinal").text()) || 0; 
+
+    let jugadorExistente = tablaLideres.find(j => j.nombre.toLowerCase().trim() === nomJugador.toLowerCase().trim());
+
+    if (jugadorExistente) {
+        if (puntosActuales > jugadorExistente.puntos) {
+            jugadorExistente.puntos = puntosActuales;
+        }
+    } else {
+        tablaLideres.push({
+            nombre: nomJugador, 
+            puntos: puntosActuales
+        });
+    }
+
+    tablaLideres.sort((a, b) => b.puntos - a.puntos);
+
+    let top3 = tablaLideres.slice(0, 3);
+
+    localStorage.setItem('top3_jugadores', JSON.stringify(top3));
+
+    let $ranking = $('.ranking');
+
+    $ranking.find('.fila').remove();
+
+    top3.forEach((jugadorActual) => {
+        let filaHtml = `
+            <div class="fila">
+                <span>${jugadorActual.nombre}</span>
+                <span>${jugadorActual.puntos}</span>
+            </div>
+        `;
+        $ranking.append(filaHtml);
+    });
+}
 function animacio() {
-    if (!joc.jocActiu){
+    if (!joc.jocActiu) {
         return;
     }
 

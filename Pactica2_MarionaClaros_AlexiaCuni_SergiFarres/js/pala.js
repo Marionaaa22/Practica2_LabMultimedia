@@ -9,8 +9,8 @@ class Pala {
         this.posicio = puntPosicio;
         this.radius = 20;
         this.vy = 5;     
-        this.vx = 5;                                                     // velocitat = 10 píxels per fotograma
-        this.color = "#D30"; 
+        this.vx = 5;                                                     
+        this.color = "white";
     }
 
     update(){
