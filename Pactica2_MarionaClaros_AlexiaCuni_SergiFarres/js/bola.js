@@ -4,7 +4,7 @@ class Bola {
         this.posicio = puntPosicio;
         this.vx = 1;
         this.vy = -1;
-        this.color = "#fff";
+        this.color = "white";
         this.audioMur = new Audio("./so/romperMuro.mp3");
         this.soPala = new Audio("./so/soPala.mp3");
         this.soVides = new Audio("./so/so_perdvides.mp3");

@@ -212,9 +212,57 @@ body {
 #btnTornarJugar {
 
     background:
+        linear-gradient(135deg, #00f5ff, #7c3aed);
+}
+
+#btnSortir {
+    background:
         linear-gradient(135deg, #ff416c, #ff4b2b);
 }
 
+#btnGuardar {
+
+    background:
+        linear-gradient(135deg, #00f5ff, #7c3aed);
+
+}
+
+#colorBola,
+#colorPala {
+    width: 250px;
+    padding: 10px 15px;
+    margin: 10px 0 20px 0;
+    font-size: 16px;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#colorBola:hover,
+#colorPala:hover {
+    border-color: #2980b9;
+}
+
+#colorBola:focus,
+#colorPala:focus {
+    border-color: #2980b9;
+}
+
+#colorBola option,
+#colorPala option {
+    padding: 10px;
+    background-color: white;
+    color: #333;
+}
+
+#btnCamabiarNivell{
+    background:
+        linear-gradient(135deg, #56ab2f, #a8e063);
+}
 #btnContinuar {
 
     background:
@@ -278,7 +326,7 @@ body {
 }
 
 #btnAjustes {
-    margin-left: auto;  
+    margin-left: auto;
     background: transparent;
     border: none;
     font-size: 20px;
@@ -288,7 +336,7 @@ body {
 
 #jugadorInfo span {
 
-    
+
     margin-left: 10px;
 
     color: #ffe600;
