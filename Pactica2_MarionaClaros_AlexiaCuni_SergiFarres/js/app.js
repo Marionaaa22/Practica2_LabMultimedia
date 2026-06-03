@@ -120,6 +120,9 @@ function tornaJugar() {
 
 function sortirJoc() {
 
+    $("#modalGuanyar").hide();
+    $("#modalAjustes").hide();
+    
     registrarRecords();
 
     joc.jocActiu = false;
@@ -203,8 +206,9 @@ function seguentNivell() {
 
     } else {
 
+        $("#modalGuanyar").hide();
         alert("¡Has completat tots els nivells!");
-        sortirJoc();
+        tornaJugar();
     }
 }
 
