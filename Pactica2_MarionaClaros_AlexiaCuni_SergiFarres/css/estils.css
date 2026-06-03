@@ -258,6 +258,10 @@ body {
     background-color: white;
     color: #333;
 }
+#btnSeguentNivell{
+    background:
+        linear-gradient(135deg, #00f5ff, #7c3aed);
+}
 
 #btnCamabiarNivell{
     background:

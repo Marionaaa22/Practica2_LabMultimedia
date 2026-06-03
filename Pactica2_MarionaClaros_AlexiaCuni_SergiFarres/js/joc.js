@@ -72,6 +72,19 @@ class Joc {
 
     }
 
+    acabaJoc() {
+
+        this.jocActiu = false;
+
+        clearInterval(intervalTemps);
+
+        $("#nomJugadorGuanyar").text($("#nomJugador").text());
+        $("#tempsGuanyar").text($("#temps").text());
+        $("#puntsGuanyar").text($("#punts").text());
+
+        $("#modalGuanyar").css("display", "flex");
+    }
+
     update() {
 
         if (this.pala.posicio.x > 0) {

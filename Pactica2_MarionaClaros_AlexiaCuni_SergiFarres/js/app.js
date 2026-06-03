@@ -37,7 +37,7 @@ $(document).ready(function () {
 
         joc.configuraNivell(nivell);
         registrarRecords();
-        
+
         $("#modalNivell").hide();
 
         // Colores por defecto
@@ -121,7 +121,7 @@ function tornaJugar() {
 function sortirJoc() {
 
     registrarRecords();
-    
+
     joc.jocActiu = false;
 
     joc.vides = 3;
@@ -174,6 +174,40 @@ function guardarAjustes() {
 
 }
 
+function seguentNivell() {
+
+    $("#modalGuanyar").hide();
+
+    let nivellActual = parseInt($("#nivellActual").text());
+
+    if (nivellActual < 3) {
+
+        nivellActual++;
+
+        $("#nivellActual").text(nivellActual);
+
+        joc.vides = 3;
+        $("#videsJugador").text(joc.vides);
+
+        joc.bola.posicio.x = joc.canvas.width / 2;
+        joc.bola.posicio.y = joc.canvas.height / 2;
+
+        joc.bola.vx = 1;
+        joc.bola.vy = 1;
+
+        joc.configuraNivell(nivellActual - 1);
+
+        joc.jocActiu = true;
+
+        requestAnimationFrame(animacio);
+
+    } else {
+
+        alert("¡Has completat tots els nivells!");
+        sortirJoc();
+    }
+}
+
 function cambiaNivell() {
 
     $("#modalAjustes").hide();
@@ -200,12 +234,12 @@ function cambiaNivell() {
 
 }
 
-function registrarRecords(){
+function registrarRecords() {
 
     let tablaLideres = localStorage.getItem('top3_jugadores');
     tablaLideres = tablaLideres ? JSON.parse(tablaLideres) : [];
 
-    let puntosActuales = parseInt($("#puntsFinal").text()) || 0; 
+    let puntosActuales = parseInt($("#puntsFinal").text()) || 0;
 
     let jugadorExistente = tablaLideres.find(j => j.nombre.toLowerCase().trim() === nomJugador.toLowerCase().trim());
 
@@ -215,7 +249,7 @@ function registrarRecords(){
         }
     } else {
         tablaLideres.push({
-            nombre: nomJugador, 
+            nombre: nomJugador,
             puntos: puntosActuales
         });
     }
