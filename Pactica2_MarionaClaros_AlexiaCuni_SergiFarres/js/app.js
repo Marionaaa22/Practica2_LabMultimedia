@@ -36,7 +36,8 @@ $(document).ready(function () {
     function iniciarJuego(nivell) {
 
         joc.configuraNivell(nivell);
-
+        registrarRecords();
+        
         $("#modalNivell").hide();
 
         // Colores por defecto
@@ -118,6 +119,9 @@ function tornaJugar() {
 }
 
 function sortirJoc() {
+
+    registrarRecords();
+    
     joc.jocActiu = false;
 
     joc.vides = 3;
@@ -218,7 +222,7 @@ function registrarRecords(){
 
     tablaLideres.sort((a, b) => b.puntos - a.puntos);
 
-    let top3 = tablaLideres.slice(0, 3);
+    let top3 = tablaLideres.slice(0, 5);
 
     localStorage.setItem('top3_jugadores', JSON.stringify(top3));
 
