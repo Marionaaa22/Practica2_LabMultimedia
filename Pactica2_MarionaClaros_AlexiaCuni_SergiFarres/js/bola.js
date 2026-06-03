@@ -169,6 +169,12 @@ class Bola {
 
                     xoc = true;
 
+                    let quedenTotxos = joc.totxo.totxos.some(t => !t.tocat);
+
+                    if (!quedenTotxos) {
+                        joc.acabaJoc();
+                        return;
+                    }
 
 
                     let centroTotxoX = t.posicio.x + t.amplada / 2;

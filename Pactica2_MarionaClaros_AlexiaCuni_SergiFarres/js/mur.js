@@ -61,10 +61,10 @@ class Mur {
             {
                 color: "#4CF", // blue cel
                 totxos: [
+                    /* "aaaaaaaaaaaa",
                     "aaaaaaaaaaaa",
-                    "aaaaaaaaaaaa",
-                    "aaaaaaaaaaaa",
-                    "aaaaaaaaaaaa",
+                    "aaaaaaaaaaaa", */
+                    "a",
                 ]
             },
             {
