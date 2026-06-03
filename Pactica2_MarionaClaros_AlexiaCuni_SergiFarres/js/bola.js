@@ -132,7 +132,9 @@ class Bola {
         //Xoc amb la pala
 
         if (
+            this.vy > 0 &&
             this.posicio.y + this.radi >= pala.posicio.y &&
+            this.posicio.y - this.radi < pala.posicio.y &&
             this.posicio.x >= pala.posicio.x &&
             this.posicio.x <= pala.posicio.x + pala.amplada
         ) {
@@ -149,59 +151,63 @@ class Bola {
             this.soPala.play();
         }
 
-
-        //Xoc amb els totxos del mur
-        //Utilitzem el mètode INTERSECCIOSEGMENTRECTANGLE
         if (!xoc && joc && joc.totxo && joc.totxo.totxos) {
-    let llistaTotxos = joc.totxo.totxos;
+            let llistaTotxos = joc.totxo.totxos;
 
-    for (let i = 0; i < llistaTotxos.length; i++) {
-        let t = llistaTotxos[i];
+            for (let i = 0; i < llistaTotxos.length; i++) {
+                let t = llistaTotxos[i];
 
-        if (t.tocat) continue;
+                if (t.tocat) continue;
 
-        if (t.puntInteriorRectangle(puntSeguent)) {
-            t.tocat = true; // Rompemos el bloque
-            xoc = true;
+                if (t.puntInteriorRectangle(puntSeguent)) {
+                    t.tocat = true; // Rompemos el bloque
+                    this.audioMur.currentTime = 0;
+                    this.audioMur.play();
+                    joc.punts = joc.punts + 10;
 
-           
-            let centroTotxoX = t.posicio.x + t.amplada / 2;
-            let centroTotxoY = t.posicio.y + t.alcada / 2;
+                    $("#punts").text(joc.punts);
 
-            
-            let distanciaX = this.posicio.x - centroTotxoX;
-            let distanciaY = this.posicio.y - centroTotxoY;
+                    xoc = true;
 
-         
-            let overlapX = Math.abs(distanciaX) / (t.amplada / 2);
-            let overlapY = Math.abs(distanciaY) / (t.alcada / 2);
 
-            if (overlapX > overlapY) {
-          
-                this.vx = -this.vx;
-                
-               
-                if (distanciaX > 0) {
-                    this.posicio.x = t.posicio.x + t.amplada + this.radi; // Lado derecho
-                } else {
-                    this.posicio.x = t.posicio.x - this.radi; // Lado izquierdo
+
+                    let centroTotxoX = t.posicio.x + t.amplada / 2;
+                    let centroTotxoY = t.posicio.y + t.alcada / 2;
+
+
+                    let distanciaX = this.posicio.x - centroTotxoX;
+                    let distanciaY = this.posicio.y - centroTotxoY;
+
+
+                    let overlapX = Math.abs(distanciaX) / (t.amplada / 2);
+                    let overlapY = Math.abs(distanciaY) / (t.alcada / 2);
+
+                    if (overlapX > overlapY) {
+
+                        this.vx = -this.vx;
+
+
+                        if (distanciaX > 0) {
+                            this.posicio.x = t.posicio.x + t.amplada + this.radi; // Lado derecho
+                        } else {
+                            this.posicio.x = t.posicio.x - this.radi; // Lado izquierdo
+                        }
+                    } else {
+
+                        this.vy = -this.vy;
+
+
+                        if (distanciaY > 0) {
+                            this.posicio.y = t.posicio.y + t.alcada + this.radi; // Lado inferior
+                        } else {
+                            this.posicio.y = t.posicio.y - this.radi; // Lado superior
+                        }
+                    }
+
+                    break;
                 }
-            } else {
-               
-                this.vy = -this.vy;
-                
-              
-                if (distanciaY > 0) {
-                    this.posicio.y = t.posicio.y + t.alcada + this.radi; // Lado inferior
-                } else {
-                    this.posicio.y = t.posicio.y - this.radi; // Lado superior
-                }
-            }   
-            
-            break; 
+            }
         }
-    }
-}
 
 
         if (!xoc) {
@@ -220,15 +226,15 @@ class Bola {
         let distanciaIMin = Infinity;
         let voraI;
 
-       
+
         let segmentVoraSuperior = new Segment(rectangle.posicio,
             new Punt(rectangle.posicio.x + rectangle.amplada, rectangle.posicio.y));
-    
 
-     
+
+
         puntI = segment.puntInterseccio(segmentVoraSuperior);
         if (puntI) {
-           
+
             distanciaI = Punt.distanciaDosPunts(segment.puntA, puntI);
             if (distanciaI < distanciaIMin) {
                 distanciaIMin = distanciaI;
@@ -236,12 +242,14 @@ class Bola {
                 voraI = "superior";
             }
         }
-        
+
 
         if (voraI) {
             return { pI: puntIMin, vora: voraI };
         }
     }
+
+
     distancia = function (p1, p2) {
         return Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
     }
