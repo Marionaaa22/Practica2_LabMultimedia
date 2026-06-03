@@ -120,24 +120,23 @@ class Bola {
             t.tocat = true; // Rompemos el bloque
             xoc = true;
 
-            // 1. Determinar el centro del bloque
+           
             let centroTotxoX = t.posicio.x + t.amplada / 2;
             let centroTotxoY = t.posicio.y + t.alcada / 2;
 
-            // 2. Calcular la distancia desde el centro a la posición de la bola
+            
             let distanciaX = this.posicio.x - centroTotxoX;
             let distanciaY = this.posicio.y - centroTotxoY;
 
-            // 3. Normalizar la distancia dividiendo por la mitad del tamaño 
-            // (Esto equilibra bloques que sean muy anchos pero muy bajitos)
+         
             let overlapX = Math.abs(distanciaX) / (t.amplada / 2);
             let overlapY = Math.abs(distanciaY) / (t.alcada / 2);
 
             if (overlapX > overlapY) {
-                // --- REBOTE HORIZONTAL (Pega en los laterales izquierdo/derecho) ---
+          
                 this.vx = -this.vx;
                 
-                // Recolocamos la bola fuera del bloque para evitar que se quede atrapada
+               
                 if (distanciaX > 0) {
                     this.posicio.x = t.posicio.x + t.amplada + this.radi; // Lado derecho
                 } else {
@@ -155,7 +154,7 @@ class Bola {
                 }
             }   
             
-            break; // Salimos del bucle al chocar con un bloque
+            break; 
         }
     }
 }
@@ -170,35 +169,22 @@ class Bola {
 
     interseccioSegmentRectangle(segment, rectangle) {
 
-        //1r REVISAR SI EXISTEIX UN PUNT D'INTERSECCIÓ EN UN DELS 4 SEGMENTS
-        //SI EXISTEIX, QUIN ÉS AQUEST PUNT
-        //si hi ha més d'un, el més ajustat
+
         let puntI;
         let distanciaI;
         let puntIMin;
         let distanciaIMin = Infinity;
         let voraI;
 
-        //calcular punt d'intersecció amb les 4 vores del rectangle
-        //necessitem coneixer els 4 segments del rectangle
-        //vora superior
+       
         let segmentVoraSuperior = new Segment(rectangle.posicio,
             new Punt(rectangle.posicio.x + rectangle.amplada, rectangle.posicio.y));
-        //vora inferior
+    
 
-        //vora esquerra
-
-        //vora dreta
-
-
-        //2n REVISAR SI EXISTEIX UN PUNT D'INTERSECCIÓ EN UN DELS 4 SEGMENTS
-        //SI EXISTEIX, QUIN ÉS AQUEST PUNT
-        //si hi ha més d'n, el més ajustat
-
-        //vora superior
+     
         puntI = segment.puntInterseccio(segmentVoraSuperior);
         if (puntI) {
-            //distancia entre dos punts, el punt inicial del segment i el punt d'intersecció
+           
             distanciaI = Punt.distanciaDosPunts(segment.puntA, puntI);
             if (distanciaI < distanciaIMin) {
                 distanciaIMin = distanciaI;
@@ -206,13 +192,8 @@ class Bola {
                 voraI = "superior";
             }
         }
-        //vora inferior
+        
 
-        //vora esquerra
-
-        //vora dreta
-
-        //Retorna la vora on s'ha produït la col·lisió, i el punt (x,y)
         if (voraI) {
             return { pI: puntIMin, vora: voraI };
         }
