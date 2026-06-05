@@ -19,6 +19,8 @@ class Joc {
         this.pala = new Pala(new Punt((this.canvas.width - 60) / 2, this.canvas.height - 15), 60, 4);
         this.totxo = new Mur();
 
+        this.tempsFinal = 0;
+
         this.totxo.defineixNivells();
 
 
@@ -74,20 +76,44 @@ class Joc {
 
     acabaJoc() {
 
+        clearInterval(intervalTemps);
         this.jocActiu = false;
+        if (this.campanya) {
+            this.acabaJocCampanya();
+        } else {
+            this.acabaJocNormal();
+        }
+    }
 
+    acabaJocNormal() {
+
+        this.jocActiu = false;
         clearInterval(intervalTemps);
 
         $("#nomJugadorGuanyar").text($("#nomJugador").text());
-        $("#tempsGuanyar").text($("#temps").text());
+
+        $("#tempsGuanyar").text(this.tempsFinal + "s");
         $("#puntsGuanyar").text($("#punts").text());
 
-        if (joc.campanya === true) {
-        seguentNivell(); 
-    } else {
-        $("#modalGuanyar").css("display", "flex"); 
+        $("#modalGuanyar").css("display", "flex");
     }
+
+    acabaJocCampanya() {
+
+        this.jocActiu = false;
+        clearInterval(intervalTemps);
+
+        $("#nomJugadorCampanya").text(nomJugador);
+        $("#tempsCampanya").text(this.tempsFinal + "s");
+        $("#puntsCampanya").text(joc.punts);
+
+        if (this.nivellActual >= 3) {
+            $("#modaHasGuanyatCampanya").css("display", "flex");
+        } else {
+            $("#modalCampanya").css("display", "flex");
+        }
     }
+
 
     update() {
 

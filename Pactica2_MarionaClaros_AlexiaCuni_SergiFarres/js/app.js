@@ -77,10 +77,20 @@ $(document).ready(function () {
     });
 
     $("#btnNivellC").click(function () {
+
         joc.campanya = true;
         joc.nivellActual = 1;
+
+        joc.vides = 3;
+        joc.punts = 0;
+
+        $("#videsJugador").text(joc.vides);
+        $("#punts").text(joc.punts);
+
         iniciarJuego(0);
-        $("#nivellActual").text("CAMPANYA");
+        iniciarTemps();
+
+        $("#nivellActual").text("CAMPANYA (Nivell 1)");
     });
 
 });
@@ -88,7 +98,9 @@ $(document).ready(function () {
 function iniciarTemps() {
 
     segons = 0;
-    $("#temps").text(segons + "s");
+    joc.tempsFinal = 0;
+
+    $("#temps").text("0s");
 
     clearInterval(intervalTemps);
 
@@ -97,6 +109,8 @@ function iniciarTemps() {
         segons++;
         $("#temps").text(segons + "s");
 
+
+        joc.tempsFinal = segons; 
     }, 1000);
 }
 
@@ -132,7 +146,9 @@ function sortirJoc() {
 
     $("#modalGuanyar").hide();
     $("#modalAjustes").hide();
-    
+    $("#modalCampanya").hide();
+    $("#modaHasGuanyatCampanya").hide();
+
     registrarRecords();
 
     joc.jocActiu = false;
@@ -187,62 +203,42 @@ function guardarAjustes() {
 
 }
 
-function seguentNivell() {
+function seguentNivellCampanya() {
 
-   if (joc.campanya !== true) {
-        $("#modalGuanyar").hide();
+    $("#modalCampanya").hide();
+
+    joc.nivellActual++;
+
+    if (joc.nivellActual > 3) {
+        $("#modalCampanya").css("display", "flex");
+        return;
     }
 
-    let nivellActual;
-    
-    if (joc.campanya === true) {
-       nivellActual = joc.nivellActual !== undefined ? joc.nivellActual : 1;
-    }
-    else {
-        nivellActual = parseInt($("#nivellActual").text());
-    }
+    $("#nivellActual").text(
+        "CAMPANYA (Nivell " + joc.nivellActual + ")"
+    );
 
-   
+    joc.bola.posicio.x = joc.canvas.width / 2;
+    joc.bola.posicio.y = joc.canvas.height / 2;
 
-    if (nivellActual < 3) {
+    joc.bola.vx = 0;
+    joc.bola.vy = 0;
 
+    joc.configuraNivell(joc.nivellActual - 1);
 
-        nivellActual++;
-
-       if (joc.campanya === true) {
-            joc.nivellActual = nivellActual;
-            $("#nivellActual").text("CAMPANYA (Nivell " + nivellActual + ")");
-        } else {
-            $("#nivellActual").text(nivellActual);
-        }
-
-        joc.vides = 3;
-        $("#videsJugador").text(joc.vides);
-
-        joc.bola.posicio.x = joc.canvas.width / 2;
-        joc.bola.posicio.y = joc.canvas.height / 2;
-
+    setTimeout(() => {
         joc.bola.vx = 1;
         joc.bola.vy = 1;
+    }, 1000);
 
-        joc.configuraNivell(nivellActual - 1);
-
-        joc.jocActiu = true;
-
-        requestAnimationFrame(animacio);
-
-    } 
-else {
-        $("#modalGuanyar").hide();
-        alert("¡Has completat tots els nivells!");
-        tornaJugar();
-    }
-
+    joc.jocActiu = true;
+    requestAnimationFrame(animacio);
 }
 
 function cambiaNivell() {
 
     $("#modalAjustes").hide();
+    $("#modalGuanyar").hide();
     joc.jocActiu = false
 
     joc.jocActiu = false;

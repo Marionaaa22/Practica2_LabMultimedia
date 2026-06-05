@@ -100,7 +100,25 @@
         </div>
     </div>
 
-    <div class="modal" id="modalGuanyar">
+    <div class="modal" id="modalCampanya">
+        <div class="modal-content">
+            <h1>NIVELL COMPLETAT!</h1>
+
+            <h2><span id="nomJugadorCampanya"></span></h2>
+            <h2>Temps: <span id="tempsCampanya"></span></h2>
+            <h2>Punts: <span id="puntsCampanya"></span></h2>
+
+            <button type="button" id="btnSeguentNivellCampanya" onclick="seguentNivellCampanya()">
+                Següent nivell
+            </button>
+
+            <button type="button" id="btnSortirCampanya" onclick="sortirJoc()">
+                Sortir
+            </button>
+        </div>
+
+    </div>
+        <div class="modal" id="modalGuanyar">
         <div class="modal-content">
             <h1>COMPLETAT!</h1>
 
@@ -108,10 +126,21 @@
             <h2>Temps: <span id="tempsGuanyar"></span></h2>
             <h2>Punts: <span id="puntsGuanyar"></span></h2>
 
-            <button type="button" id="btnSeguentNivell" onclick="seguentNivell()">Seguent nivell</button>
-            <button type="button" id="btnSortir" onclick="sortirJoc()">Sortir</button>
+            <button type="button" id="btnSortir" onclick="cambiaNivell()">Sortir</button>
         </div>
     </div>
+
+    <div class="modal" id="modaHasGuanyatCampanya">
+    <div class="modal-content">
+        <h1>NIVELL COMPLETAT!</h1>
+
+        <h2><span id="nomJugadorGuanyar"></span></h2>
+        <h2>Temps: <span id="tempsGuanyar"></span></h2>
+        <h2>Punts: <span id="puntsGuanyar"></span></h2>
+
+        <button type="button" id="btnSortir" onclick="sortirJoc()">Sortir</button>
+    </div>
+</div>
 
 </body>
 

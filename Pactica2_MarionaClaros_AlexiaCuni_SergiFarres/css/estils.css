@@ -220,6 +220,17 @@ body {
         linear-gradient(135deg, #ff416c, #ff4b2b);
 }
 
+#btnSeguentNivellCampanya{
+    background:
+        linear-gradient(135deg, #00f5ff, #7c3aed);
+
+}
+
+#btnSortirCampanya{
+    background:
+        linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
 #btnGuardar {
 
     background:
