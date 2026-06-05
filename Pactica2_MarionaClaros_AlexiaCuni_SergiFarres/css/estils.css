@@ -290,6 +290,11 @@ body {
     background:
         linear-gradient(135deg, #ff512f, #dd2476);
 }
+#btnNivellC {
+
+    background:
+        linear-gradient(135deg, #300a80, #24acdd);
+}
 
 #jugadorInfo {
 

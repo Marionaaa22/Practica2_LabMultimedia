@@ -59,18 +59,28 @@ $(document).ready(function () {
     }
 
     $("#btnNivell1").click(function () {
+        joc.campanya = false;
         iniciarJuego(0);
         $("#nivellActual").text("1");
     });
 
     $("#btnNivell2").click(function () {
+        joc.campanya = false;
         iniciarJuego(1);
         $("#nivellActual").text("2");
     });
 
     $("#btnNivell3").click(function () {
+        joc.campanya = false;
         iniciarJuego(2);
         $("#nivellActual").text("3");
+    });
+
+    $("#btnNivellC").click(function () {
+        joc.campanya = true;
+        joc.nivellActual = 1;
+        iniciarJuego(0);
+        $("#nivellActual").text("CAMPANYA");
     });
 
 });
@@ -179,15 +189,32 @@ function guardarAjustes() {
 
 function seguentNivell() {
 
-    $("#modalGuanyar").hide();
+   if (joc.campanya !== true) {
+        $("#modalGuanyar").hide();
+    }
 
-    let nivellActual = parseInt($("#nivellActual").text());
+    let nivellActual;
+    
+    if (joc.campanya === true) {
+       nivellActual = joc.nivellActual !== undefined ? joc.nivellActual : 1;
+    }
+    else {
+        nivellActual = parseInt($("#nivellActual").text());
+    }
+
+   
 
     if (nivellActual < 3) {
 
+
         nivellActual++;
 
-        $("#nivellActual").text(nivellActual);
+       if (joc.campanya === true) {
+            joc.nivellActual = nivellActual;
+            $("#nivellActual").text("CAMPANYA (Nivell " + nivellActual + ")");
+        } else {
+            $("#nivellActual").text(nivellActual);
+        }
 
         joc.vides = 3;
         $("#videsJugador").text(joc.vides);
@@ -204,12 +231,13 @@ function seguentNivell() {
 
         requestAnimationFrame(animacio);
 
-    } else {
-
+    } 
+else {
         $("#modalGuanyar").hide();
         alert("¡Has completat tots els nivells!");
         tornaJugar();
     }
+
 }
 
 function cambiaNivell() {
