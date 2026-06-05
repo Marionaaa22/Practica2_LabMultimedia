@@ -82,7 +82,11 @@ class Joc {
         $("#tempsGuanyar").text($("#temps").text());
         $("#puntsGuanyar").text($("#punts").text());
 
-        $("#modalGuanyar").css("display", "flex");
+        if (joc.campanya === true) {
+        seguentNivell(); 
+    } else {
+        $("#modalGuanyar").css("display", "flex"); 
+    }
     }
 
     update() {
