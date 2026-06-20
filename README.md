@@ -7,7 +7,7 @@ Este proyecto consiste en una versión del clásico videojuego Breakout, desarro
 
 El objetivo del juego es controlar una pala para mantener la pelota en movimiento y destruir todos los bloques presentes en cada nivel. El proyecto ha sido desarrollado íntegramente para ejecutarse en el navegador, sin necesidad de instalar software adicional.
 
-## 🕹️ Características
+## ⭐ Características
 - Pantalla de bienvenida con introducción del nombre del jugador.
 - Sistema de clasificación con almacenamiento de las 5 mejores puntuaciones.
 - Selección de modo de juego
@@ -22,7 +22,7 @@ El objetivo del juego es controlar una pala para mantener la pelota en movimient
 - CSS3
 - JavaScript
 
-## 🧩 Instalación y ejecución
+## 🚀 Instalación y ejecución
 
 1. Clona este repositorio:
 
@@ -32,3 +32,11 @@ El objetivo del juego es controlar una pala para mantener la pelota en movimient
 
 2. Accede al directorio del proyecto
 3. Abre el archivo index.html en tu navegador.
+
+## Autores 👨‍💻
+
+Mariona Claros  
+
+Alexia Cuní 
+
+Sergi Farres
